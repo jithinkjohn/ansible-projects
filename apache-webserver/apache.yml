@@ -1,0 +1,35 @@
+---
+- name: Apache Web Server Setup
+  hosts: managed
+  become: true
+
+  tasks:
+    - name: Install Apache Package
+      yum:
+        name: httpd
+        state: present
+
+    - name: Start and Enable Apache service
+      service:
+        name: httpd
+        state: started
+        enabled: true
+
+    - name: Allow HTTP service in Firewall
+      ansible.posix.firewalld:
+        service: http
+        permanent: true
+        state: enabled
+        immediate: true
+
+    - name: Create a custom index.html page
+      copy:
+        content: |
+          <html>
+          <body>
+          <h1>Apache Installed using Ansible</h1>
+          <p>Server: {{ inventory_hostname }}</p>
+          </body>
+          </html>
+        dest: /var/www/html/index.html
+
