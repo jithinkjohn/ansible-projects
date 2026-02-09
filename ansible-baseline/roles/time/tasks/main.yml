@@ -1,0 +1,14 @@
+---
+# Phase 7: Time synchronization
+
+- name: Install chrony
+  dnf:
+    name: chrony
+    state: present
+
+- name: Enable and start chronyd
+  service:
+    name: chronyd
+    state: started
+    enabled: true
+

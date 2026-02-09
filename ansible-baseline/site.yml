@@ -1,0 +1,13 @@
+---
+- name: Apply baseline configuration
+  hosts: baseline
+  become: yes
+  roles:
+    - common
+    - firewall
+    - ssh
+    - users
+    - time
+
+
+

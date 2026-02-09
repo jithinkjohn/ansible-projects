@@ -1,0 +1,21 @@
+
+# roles/common/tasks/main.yml
+---
+- name: Install common packages
+  package:
+    name:
+      - vim
+      - curl
+    state: present
+
+- name: Ensure chrony is installed
+  package:
+    name: chrony
+    state: present
+
+- name: Ensure chrony is running and enabled
+  service:
+    name: chronyd
+    state: started
+    enabled: yes
+
