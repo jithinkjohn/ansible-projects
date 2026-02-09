@@ -60,12 +60,13 @@ handlers.
 
 ---
 
-## Usage
+## How to run
 
 Run the baseline against the inventory:
 
 ```bash
 ansible-playbook -i inventory/hosts site.yml
+
 ```
 
 ## Author
