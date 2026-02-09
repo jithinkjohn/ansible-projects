@@ -25,26 +25,34 @@ The baseline performs the following tasks on managed hosts:
 ---
 
 ## Project Layout
-
+```text
 ansible-baseline/
 ├── group_vars/
-│ └── all.yml
+│   └── all.yml
 ├── inventory/
-│ └── hosts
+│   └── hosts
 ├── roles/
-│ ├── common/
-│ │ └── tasks/main.yml
-│ ├── firewall/
-│ │ └── tasks/main.yml
-│ ├── ssh/
-│ │ ├── tasks/main.yml
-│ │ └── handlers/main.yml
-│ ├── users/
-│ │ ├── tasks/main.yml
-│ │ └── files/devopsuser.pub
-│ └── time/
-│ └── tasks/main.yml
+│   ├── common/
+│   │   └── tasks/
+│   │       └── main.yml
+│   ├── firewall/
+│   │   └── tasks/
+│   │       └── main.yml
+│   ├── ssh/
+│   │   ├── tasks/
+│   │   │   └── main.yml
+│   │   └── handlers/
+│   │       └── main.yml
+│   ├── users/
+│   │   ├── tasks/
+│   │   │   └── main.yml
+│   │   └── files/
+│   │       └── devopsuser.pub
+│   └── time/
+│       └── tasks/
+│           └── main.yml
 └── site.yml
+```
 
 Each role contains a `tasks/main.yml` file and is responsible for a single area
 of system configuration. SSH-related service restarts are handled using Ansible
