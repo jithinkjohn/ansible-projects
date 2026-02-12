@@ -89,8 +89,8 @@ http_port: 80
 server_admin: devops
 document_root: /var/www/devsite
 server_name: node1
-
 Change prod values in group_vars/prod/webservers.yml accordingly.
+
 ---
 ## Phases
 
@@ -104,6 +104,7 @@ Deploy test index page
 
 Start and enable Apache service
 
+
 Phase 2: VirtualHost & Templates
 
 Deploy Jinja2-based VirtualHost configuration
@@ -112,6 +113,7 @@ Remove default Apache welcome page
 
 Use handlers to restart Apache when configuration changes
 
+
 Phase 3: Firewall, SELinux, PHP
 
 Firewall: Allow HTTP, HTTPS, and SSH ports; reload firewalld
@@ -119,6 +121,7 @@ Firewall: Allow HTTP, HTTPS, and SSH ports; reload firewalld
 SELinux: Apply correct file context for custom directories
 
 PHP: Install PHP and extensions
+
 ---
 ## Running the Playbook
 For dev environment:
