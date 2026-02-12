@@ -1,0 +1,5 @@
+http_port: 80
+server_admin: devops
+document_root: /var/www/devsite
+server_name: node1
+

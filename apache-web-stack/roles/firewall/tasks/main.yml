@@ -1,0 +1,28 @@
+- name: Ensure firewalld is installed
+  yum:
+    name: firewalld
+    state: present
+
+- name: Ensure firewalld is running and enabled
+  service:
+    name: firewalld
+    state: started
+    enabled: yes
+
+- name: Allow HTTP and HTTPS
+  firewalld:
+    service: "{{ item }}"
+    permanent: yes
+    state: enabled
+  loop:
+    - http
+    - https
+  notify: Reload firewalld
+
+- name: Ensure SSH is allowed
+  firewalld:
+    service: ssh
+    permanent: yes
+    state: enabled
+  notify: Reload firewalld
+

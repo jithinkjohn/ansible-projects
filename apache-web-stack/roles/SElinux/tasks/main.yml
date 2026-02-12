@@ -1,0 +1,14 @@
+- name: Ensure SELinux allows Apache to serve custom directory
+  seboolean:
+    name: httpd_read_user_content
+    state: true
+    persistent: yes
+
+- name: Set correct file context for DocumentRoot
+  command: semanage fcontext -a -t httpd_sys_content_t '{{ document_root }}(/.*)?'
+  args:
+    creates: "/etc/selinux/targeted/contexts/custom_apache.conf"
+
+- name: Apply SELinux context
+  command: restorecon -Rv '{{ document_root }}'
+

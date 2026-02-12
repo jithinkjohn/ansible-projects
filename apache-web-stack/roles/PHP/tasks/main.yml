@@ -1,0 +1,14 @@
+- name: Install PHP and extensions
+  yum:
+    name:
+      - php
+      - php-mysqlnd
+      - php-fpm
+    state: present
+
+- name: Ensure PHP-FPM service is running
+  service:
+    name: php-fpm
+    state: started
+    enabled: yes
+

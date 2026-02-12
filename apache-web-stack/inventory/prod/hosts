@@ -1,0 +1,6 @@
+[prod]
+node2 ansible_host=192.168.172.12 ansible_user=devopsuser
+
+[webservers:children]
+prod
+

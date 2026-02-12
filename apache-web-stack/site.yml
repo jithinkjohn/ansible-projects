@@ -1,0 +1,12 @@
+---
+- name: Deploy Apache Web Stack
+  hosts: webservers
+  become: yes
+
+  roles:
+    - firewall
+    - SElinux
+    - web
+    - PHP
+
+  

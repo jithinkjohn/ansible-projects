@@ -1,0 +1,6 @@
+[dev]
+node1 ansible_host=192.168.172.11 ansible_user=devopsuser
+
+[webservers:children]
+dev
+

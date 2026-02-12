@@ -1,0 +1,5 @@
+http_port: 80
+server_admin: admin@company.com
+document_root: /var/www/prodsite
+server_name: www.company.com
+
