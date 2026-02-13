@@ -32,10 +32,8 @@ The goal of this project is to deploy a modular web stack using Ansible with:
 ```text
 apache-web-stack/
 ├── group_vars/
-│   ├── dev/
-│   │   └── webservers.yml
-│   └── prod/
-│       └── webservers.yml
+│   ├── dev.yml
+│   └── prod.yml
 ├── inventory/
 │   ├── dev/
 │   │   └── hosts
@@ -51,7 +49,7 @@ apache-web-stack/
 │   ├── PHP/
 │   │   └── tasks/
 │   │       └── main.yml
-│   ├── SElinux/  
+│   ├── SElinux/
 │   │   └── tasks/
 │   │       └── main.yml
 │   └── web/
@@ -63,7 +61,6 @@ apache-web-stack/
 │       └── templates/
 │           └── vhost.conf.j2
 └── site.yml
-
 
 ```
 - `roles/web` → Apache installation, document root, test page, VirtualHost templates  
