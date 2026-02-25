@@ -1,0 +1,7 @@
+#!/bin/bash
+# Check /var/log/remote usage
+THRESHOLD=80
+USAGE=$(df /var/log/remote | tail -1 | awk '{print $5}' | sed 's/%//')
+if [ "$USAGE" -ge "$THRESHOLD" ]; then
+    echo "Warning: /var/log/remote usage is at $USAGE%" | mail -s "Disk Alert /var/log/remote" root
+fi

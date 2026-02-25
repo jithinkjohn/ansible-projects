@@ -1,0 +1,11 @@
+- hosts: log_server
+  become: yes
+  roles:
+    - rsyslog_server
+    - log_management
+
+- hosts: log_clients
+  become: yes
+  roles:
+    - rsyslog_client
+    

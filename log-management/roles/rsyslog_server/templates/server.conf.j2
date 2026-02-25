@@ -1,0 +1,9 @@
+# Enable TCP listener
+module(load="imtcp")
+input(type="imtcp" port="514")
+
+# Store logs by hostname
+template(name="RemoteLogs" type="string"
+         string="/var/log/remote/%HOSTNAME%.log")
+
+*.* ?RemoteLogs

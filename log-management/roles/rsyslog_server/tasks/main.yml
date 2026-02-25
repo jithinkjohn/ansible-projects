@@ -1,0 +1,25 @@
+- name: Install rsyslog
+  package:
+    name: rsyslog
+    state: present
+
+- name: Enable and start rsyslog
+  service:
+    name: rsyslog
+    state: started
+    enabled: yes
+
+- name: Configure rsyslog to receive remote logs
+  template:
+    src: server.conf.j2
+    dest: /etc/rsyslog.d/central.conf
+    mode: '0644'
+  notify: Restart rsyslog
+
+- name: Create directory for remote logs
+  file:
+    path: /var/log/remote
+    state: directory
+    owner: root
+    group: root
+    mode: '0755'

@@ -1,0 +1,8 @@
+# .gitignore
+*.retry
+*.log
+*.swp
+*.bak
+*.tmp
+.vscode/
+__pycache__/
