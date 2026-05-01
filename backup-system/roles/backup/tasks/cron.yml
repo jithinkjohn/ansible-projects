@@ -1,0 +1,7 @@
+- name: Schedule daily backup at 2 AM
+  cron:
+    name: "Daily Backup"
+    minute: "0"
+    hour: "2"
+    user: devopsuser
+    job: "ansible-playbook -i /home/devops/ansible-projects/backup-system/inventory /home/devops/ansible-projects/backup-system/site.yml --become"

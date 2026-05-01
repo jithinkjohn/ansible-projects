@@ -1,0 +1,5 @@
+backup_paths:
+  - /etc
+  - /var/log
+
+backup_temp_dir: /tmp/backups

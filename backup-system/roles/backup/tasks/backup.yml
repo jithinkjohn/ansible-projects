@@ -1,0 +1,71 @@
+# Create temp directory on nodes
+- name: Create backup directory
+  file:
+    path: "{{ backup_temp_dir }}"
+    state: directory
+    mode: '0755'
+
+# Get date
+- name: Get current date
+  command: date +%Y-%m-%d
+  register: current_date
+  changed_when: false
+
+# Set filename
+- name: Set backup file name
+  set_fact:
+    backup_file: "{{ backup_temp_dir }}/{{ inventory_hostname }}-backup-{{ current_date.stdout }}.tar.gz"
+
+# Create archive
+- name: Create backup archive
+  archive:
+    path: "{{ backup_paths }}"
+    dest: "{{ backup_file }}"
+    format: gz
+
+# Create storage on control node
+- name: Ensure backup storage exists
+  file:
+    path: "{{ backup_storage }}"
+    state: directory
+    mode: '0755'
+  delegate_to: localhost
+
+# Fetch to control node
+- name: Fetch backup
+  fetch:
+    src: "{{ backup_file }}"
+    dest: "{{ backup_storage }}/"
+    flat: yes
+
+# Verify backup exists
+- name: Check backup exists
+  stat:
+    path: "{{ backup_storage }}/{{ inventory_hostname }}-backup-{{ current_date.stdout }}.tar.gz"
+  delegate_to: localhost
+  register: backup_stat
+
+# Fail if missing
+- name: Fail if backup missing
+  fail:
+    msg: "Backup failed for {{ inventory_hostname }}"
+  when: not backup_stat.stat.exists
+
+# Retention - find old files
+- name: Find old backups
+  find:
+    paths: "{{ backup_storage }}"
+    patterns: "*.tar.gz"
+    age: "{{ backup_retention_days }}d"
+  register: old_backups
+  delegate_to: localhost
+  run_once: true
+
+# Delete old files
+- name: Delete old backups
+  file:
+    path: "{{ item.path }}"
+    state: absent
+  loop: "{{ old_backups.files }}"
+  delegate_to: localhost
+  run_once: true

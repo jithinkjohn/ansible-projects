@@ -1,0 +1,10 @@
+# Ignore unwanted system files
+*.log
+*.tmp
+*.swp
+
+# Ignore backup artifacts
+*.tar.gz
+
+# Ignore Ansible temp files
+.retry

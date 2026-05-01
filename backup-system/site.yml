@@ -1,0 +1,6 @@
+- name: Backup clients
+  hosts: backup_clients
+  become: yes
+
+  roles:
+    - backup

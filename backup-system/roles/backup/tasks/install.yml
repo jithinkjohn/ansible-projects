@@ -1,0 +1,4 @@
+- name: Ensure tar is installed
+  package:
+    name: tar
+    state: present
