@@ -1,0 +1,12 @@
+# SELinux
+selinux_state: enforcing
+
+selinux_booleans:
+  - name: httpd_can_network_connect
+    state: true
+    persistent: true
+
+# Firewall safe baseline
+firewall_allowed_services:
+  - ssh
+firewall_allowed_ports: []

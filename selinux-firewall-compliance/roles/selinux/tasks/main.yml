@@ -1,0 +1,17 @@
+- name: Ensure SELinux is in enforcing mode
+  ansible.builtin.selinux:
+    policy: targeted
+    state: "{{ selinux_state }}"
+
+- name: Set SELinux booleans
+  ansible.posix.seboolean:
+    name: "{{ item.name }}"
+    state: "{{ item.state }}"
+    persistent: "{{ item.persistent }}"
+  loop: "{{ selinux_booleans }}"
+
+- name: Restore SELinux contexts on critical directories
+  ansible.builtin.command: restorecon -Rv /var/www/
+  register: restorecon_output
+  changed_when: "'restorecon reset' in restorecon_output.stdout"
+  when: ansible_facts['os_family'] == "RedHat"

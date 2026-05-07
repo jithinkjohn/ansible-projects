@@ -1,0 +1,8 @@
+- name: SELinux & Firewall Compliance
+  hosts: all
+  become: true
+  gather_facts: true
+
+  roles:
+    - selinux
+    - firewall

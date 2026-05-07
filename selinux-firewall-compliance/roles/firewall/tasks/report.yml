@@ -1,0 +1,10 @@
+- name: Generate compliance summary
+  ansible.builtin.debug:
+    msg:
+      - "========== COMPLIANCE REPORT =========="
+      - "Host: {{ inventory_hostname }}"
+      - "Allowed Services: {{ firewall_allowed_services }}"
+      - "Allowed Ports: {{ firewall_allowed_ports }}"
+      - "Unauthorized Services Removed: {{ unauthorized_services | default([]) }}"
+      - "Unauthorized Ports Removed: {{ unauthorized_ports | default([]) }}"
+      - "======================================="

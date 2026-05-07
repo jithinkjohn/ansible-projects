@@ -1,0 +1,3 @@
+firewall_allowed_services:
+  - ssh
+firewall_allowed_ports: []

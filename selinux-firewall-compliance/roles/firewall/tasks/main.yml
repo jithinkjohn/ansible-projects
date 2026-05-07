@@ -1,0 +1,106 @@
+- name: Install firewalld
+  ansible.builtin.package:
+    name: "{{ firewalld_service }}"
+    state: present
+
+- name: Ensure firewalld is enabled and running
+  ansible.builtin.service:
+    name: "{{ firewalld_service }}"
+    state: started
+    enabled: true
+
+- name: Allow required services in firewall
+  ansible.posix.firewalld:
+    service: "{{ item }}"
+    permanent: true
+    state: enabled
+    immediate: true
+  loop: "{{ firewall_allowed_services }}"
+
+# Get currently enabled services
+- name: Get current firewall services
+  ansible.builtin.command: firewall-cmd --list-services
+  register: firewall_current_services
+  changed_when: false
+
+# Convert string output to list
+- name: Convert firewall services to list
+  ansible.builtin.set_fact:
+    current_services_list: "{{ firewall_current_services.stdout.split() }}"
+
+# Find unauthorized services
+- name: Identify unauthorized services
+  ansible.builtin.set_fact:
+    unauthorized_services: "{{ current_services_list | difference(firewall_allowed_services) }}"
+
+# Debug (important for learning)
+- name: Show unauthorized services
+  ansible.builtin.debug:
+    msg: "Unauthorized services: {{ unauthorized_services }}"
+
+# Remove unauthorized services
+- name: Remove unauthorized firewall services
+  ansible.posix.firewalld:
+    service: "{{ item }}"
+    permanent: true
+    state: disabled
+    immediate: true
+  loop: "{{ unauthorized_services }}"
+  when: unauthorized_services | length > 0
+
+- name: Allow required ports in firewall
+  ansible.posix.firewalld:
+    port: "{{ item }}"
+    permanent: true
+    state: enabled
+  loop: "{{ firewall_allowed_ports }}"
+  notify: Reload firewalld
+
+- name: Get current open ports
+  ansible.builtin.command: firewall-cmd --list-ports
+  register: firewall_current_ports
+  changed_when: false
+
+- name: Convert ports to list
+  ansible.builtin.set_fact:
+    current_ports_list: "{{ firewall_current_ports.stdout.split() }}"
+
+- name: Identify unauthorized ports
+  ansible.builtin.set_fact:
+    unauthorized_ports: "{{ current_ports_list | difference(firewall_allowed_ports) }}"
+
+- name: Remove unauthorized ports
+  ansible.posix.firewalld:
+    port: "{{ item }}"
+    permanent: true
+    state: disabled
+  loop: "{{ unauthorized_ports }}"
+  when: unauthorized_ports | length > 0
+  notify: Reload firewalld
+
+
+    # validation section
+- name: Check SSH connectivity (basic validation)
+  ansible.builtin.wait_for:
+    port: 22
+    timeout: 3
+  register: ssh_check
+  ignore_errors: true
+
+- name: Show SSH status
+  ansible.builtin.debug:
+    msg: "SSH reachable on {{ inventory_hostname }}"
+  when: ssh_check is succeeded
+
+- name: Check HTTP availability (webservers only)
+  ansible.builtin.uri:
+    url: "http://{{ ansible_host }}"
+    status_code: 200
+  register: http_check
+  when: "'webservers' in group_names"
+  ignore_errors: true
+
+# report
+- name: Show compliance report
+  ansible.builtin.include_tasks: report.yml
+
