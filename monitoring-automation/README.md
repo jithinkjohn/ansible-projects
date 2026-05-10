@@ -11,6 +11,7 @@ Grafana for visualization dashboards
 Prometheus alert rules for infrastructure monitoring
 
 The project follows production-style automation practices using Ansible roles, templates, handlers, reusable variables, and inventory-driven configuration
+
 ---
 ## Technologies Used
 
@@ -22,12 +23,14 @@ PromQL
 Linux (RHEL/Rocky/AlmaLinux)
 Firewalld
 Systemd
+
 ---
 ## Infrastructure
 
 Control Node (CN)	Ansible + Prometheus + Grafana
 Managed Host 1	Node Exporter
 Managed Host 2	Node Exporter
+
 ---
 ## Project Structure
 ```text
