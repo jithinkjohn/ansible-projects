@@ -1,0 +1,11 @@
+- hosts: clients
+  become: true
+
+  roles:
+    - node_exporter
+
+- hosts: monitoring
+  become: true
+
+  roles:
+    - prometheus
