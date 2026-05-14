@@ -187,8 +187,9 @@ Password: admin
 ### Service Installation Proof- Grafana
 
 ### Prometheus UI
-
+<img width="952" height="722" alt="prometheus" src="https://github.com/user-attachments/assets/a73cb0ce-c098-44f5-9b9e-cbc6ba173e97" />
 ### Grafana Dashboard
+<img width="1892" height="837" alt="Grafana- Dashboard" src="https://github.com/user-attachments/assets/3162a27e-4597-42ac-80a9-1b0509be18f5" />
 
 ---
 ## Metrics Visualized
