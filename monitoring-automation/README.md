@@ -180,15 +180,22 @@ Username: admin
 Password: admin
 ```
 ---
-##Screenshots
+## Screenshots
 
 ### Service Installation Proof- Prometheus
- 
-### Service Installation Proof- Grafana
+
+<img width="967" height="577" alt="prometheusinstall" src="https://github.com/user-attachments/assets/07082c5a-c521-42c4-a241-262d22bc920d" />
+
+ ### Service Installation Proof- Grafana
+
+<img width="967" height="617" alt="grafanaserver" src="https://github.com/user-attachments/assets/f679a556-e777-4f04-b33a-989979569d3f" />
 
 ### Prometheus UI
+
 <img width="952" height="722" alt="prometheus" src="https://github.com/user-attachments/assets/a73cb0ce-c098-44f5-9b9e-cbc6ba173e97" />
+
 ### Grafana Dashboard
+
 <img width="1892" height="837" alt="Grafana- Dashboard" src="https://github.com/user-attachments/assets/3162a27e-4597-42ac-80a9-1b0509be18f5" />
 
 ---
