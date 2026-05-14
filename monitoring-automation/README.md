@@ -15,14 +15,14 @@ The project follows production-style automation practices using Ansible roles, t
 ---
 ## Technologies Used
 
-Ansible
-Prometheus
-Node Exporter
-Grafana
-PromQL
-Linux (RHEL/Rocky/AlmaLinux)
-Firewalld
-Systemd
+- Ansible
+- Prometheus
+- Node Exporter
+- Grafana
+- PromQL
+- Linux (RHEL/Rocky/AlmaLinux)
+- Firewalld
+- Systemd
 
 ---
 ## Infrastructure
@@ -82,36 +82,36 @@ monitoring-automation/
 
 ### Node Exporter Automation
 
--Creates dedicated service user
--Deploys Node Exporter binary
--Configures systemd service
--Opens firewall port
--Enables and starts service
+- Creates dedicated service user
+- Deploys Node Exporter binary
+- Configures systemd service
+- Opens firewall port
+- Enables and starts service
 
 ### Prometheus Automation
 
--Deploys Prometheus server
--Dynamically generates scrape targets
--Uses Jinja2 templates
--Configures Prometheus service
--Opens firewall port
--Enables and starts service
+- Deploys Prometheus server
+- Dynamically generates scrape targets
+- Uses Jinja2 templates
+- Configures Prometheus service
+- Opens firewall port
+- Enables and starts service
 
 ### Grafana Automation
 
--Installs Grafana
--Configures Grafana service
--Opens firewall access
--Connects Grafana with Prometheus datasource
+- Installs Grafana
+- Configures Grafana service
+- Opens firewall access
+- Connects Grafana with Prometheus datasource
 
-Prometheus### Alerting System
+### Prometheus Alerting System
 
 Configured production-style alert rules:
 
--NodeDown
--HighCPUUsage
--HighMemoryUsage
--DiskAlmostFull
+- NodeDown
+- HighCPUUsage
+- HighMemoryUsage
+- DiskAlmostFull
 
 ---
 ## Monitoring Architecture
@@ -135,16 +135,16 @@ Alert Rules & Monitoring
 ---
 ## Ansible Concepts Practiced
 
--Role-based architecture
--Inventory grouping
--Templates (Jinja2)
--Handlers
--Variable separation
--Dynamic configuration generation
--Service management
--Idempotent playbooks
--Cross-host orchestration
--Firewall automation
+- Role-based architecture
+- Inventory grouping
+- Templates (Jinja2)
+- Handlers
+- Variable separation
+- Dynamic configuration generation
+- Service management
+- Idempotent playbooks
+- Cross-host orchestration
+- Firewall automation
 
 ---
 ## Deployment Steps
