@@ -202,10 +202,10 @@ Password: admin
 ---
 ## Metrics Visualized
 
-CPU Usage
-Memory Usage
-Disk Usage
-System Load
+- CPU Usage
+- Memory Usage
+- Disk Usage
+- System Load
 ---
 ## Author
 Jithin Joseph John
